@@ -125,6 +125,7 @@ angular.module("managerApp").controller("TelecomTelephonyAliasOrderGeographicalC
             ]);
         }
         var form = _.pick(this.form, filter);
+        form.city = _.deburr(form.city);
         form.offer = "alias";
         form.country = self.user.country;
         if (form.pool === 1) {
