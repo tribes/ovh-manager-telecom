@@ -1,0 +1,156 @@
+<section class="telephony-group-alias-special-transfer">
+
+    <header>
+        <section-back-link section-back-link-to-state="telecom.telephony.alias.special"
+                           section-back-link-title="{{ 'telephony_alias_special_transfer_title_back_link' | translate }}">
+        </section-back-link>
+        <h1 data-translate="telephony_alias_special_transfer_title"></h1>
+    </header>
+
+
+    <div class="telecom-section-content">
+
+        <toast-message></toast-message>
+
+        <div class="row">
+            <div class="col-md-6 widget-presentation"
+                 data-ng-if="!AliasSpecialTransferCtrl.isLoading">
+                <div class="alert alert-info"
+                     role="alert">
+                    <span data-translate="telephony_alias_special_transfer_description"></span>
+                    <a class="btn btn-link p-0"
+                       ui-sref="telecom.telephony.alias.special.fees"
+                       data-translate="telephony_alias_special_transfer_description_link"></a>
+                </div>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width: 45px;">&nbsp;</th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_transfer_date_filter' }"
+                                        data-ng-disabled="!AliasSpecialTransferCtrl.repayments.length"
+                                        data-ng-click="AliasSpecialTransferCtrl.orderBy('date')">
+                                    <span data-translate="telephony_alias_special_transfer_date_filter"></span>
+                                    <span>
+                                        <i class="oui-icon oui-icon-arrow-down"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'date' && AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                        <i class="oui-icon oui-icon-arrow-up"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'date' && !AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                    </span>
+                                </button>
+                            </th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_transfer_calling_filter' }"
+                                        data-ng-disabled="!AliasSpecialTransferCtrl.repayments.length"
+                                        data-ng-click="AliasSpecialTransferCtrl.orderBy('calling')">
+                                    <span data-translate="telephony_alias_special_transfer_calling_filter"></span>
+                                    <span>
+                                        <i class="oui-icon oui-icon-arrow-down"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'calling' && AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                        <i class="oui-icon oui-icon-arrow-up"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'calling' && !AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                    </span>
+                                </button>
+                            </th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_transfer_duration_filter' }"
+                                        data-ng-disabled="!AliasSpecialTransferCtrl.repayments.length"
+                                        data-ng-click="AliasSpecialTransferCtrl.orderBy('duration')">
+                                    <span data-translate="telephony_alias_special_transfer_duration_filter"></span>
+                                    <span>
+                                        <i class="oui-icon oui-icon-arrow-down"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'duration' && AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                        <i class="oui-icon oui-icon-arrow-up"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'duration' && !AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                    </span>
+                                </button>
+                            </th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_transfer_operator_filter' }"
+                                        data-ng-disabled="!AliasSpecialTransferCtrl.repayments.length"
+                                        data-ng-click="AliasSpecialTransferCtrl.orderBy('operator')">
+                                    <span data-translate="telephony_alias_special_transfer_operator_filter"></span>
+                                    <span>
+                                        <i class="oui-icon oui-icon-arrow-down"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'operator' && AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                        <i class="oui-icon oui-icon-arrow-up"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'operator' && !AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                    </span>
+                                </button>
+                            </th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_transfer_price_filter' }"
+                                        data-ng-disabled="!AliasSpecialTransferCtrl.repayments.length"
+                                        data-ng-click="AliasSpecialTransferCtrl.orderBy('price')">
+                                    <span data-translate="telephony_alias_special_transfer_price_filter"></span>
+                                    <span>
+                                        <i class="oui-icon oui-icon-arrow-down"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'price' && AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                        <i class="oui-icon oui-icon-arrow-up"
+                                           data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'price' && !AliasSpecialTransferCtrl.state.orderDesc">
+                                        </i>
+                                    </span>
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="repayment in AliasSpecialTransferCtrl.repayments | orderBy:AliasSpecialTransferCtrl.state.orderBy:AliasSpecialTransferCtrl.state.orderDesc track by $index">
+                            <th style="width: 45px;">&nbsp;</th>
+                            <td data-ng-bind="repayment.creationDatetime | date:'dd-MM-yyyy hh:mm:ss'"></td>
+                            <td data-ng-bind="repayment.calling"></td>
+                            <td data-ng-bind="repayment.duration"></td>
+                            <td data-ng-bind="repayment.operator"></td>
+                            <td data-ng-bind="repayment.price"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class="font-weight-bold"
+                                scope="row"
+                                colspan="2"
+                                data-translate="telephony_alias_special_transfer_total">
+                            </th>
+                            <td class="font-weight-bold"
+                                data-ng-bind="'telephony_alias_special_transfer_calls' | translate: {calls: AliasSpecialTransferCtrl.totalRepayment.calls || 0}"></td>
+                            <td colspan="2"
+                                class="font-weight-bold"
+                                data-ng-bind="'telephony_alias_special_transfer_duration' | translate: {duration: AliasSpecialTransferCtrl.totalRepayment.duration || 0}"></td>
+                            <td class="font-weight-bold"
+                                data-ng-bind="'telephony_alias_special_transfer_price' | translate: {price: AliasSpecialTransferCtrl.totalRepayment.price || 0}"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <a class="btn btn-primary mt-3"
+                   data-translate="telephony_alias_special_transfer_button"></a>
+            </div>
+            <div class="text-center"
+                 data-ng-if="AliasSpecialTransferCtrl.isLoading">
+                <oui-spinner></oui-spinner>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.telecom-section-content -->
+
+</section>
+<!-- /.telephony-group-alias-special-transfer -->

@@ -1,0 +1,313 @@
+<section class="telephony-group-alias-special-rsva">
+
+    <header>
+        <section-back-link section-back-link-to-state="telecom.telephony.alias.special"
+                           section-back-link-title="{{ 'telephony_alias_special_rsva_title_back_link' | translate }}">
+        </section-back-link>
+        <h1 data-translate="telephony_alias_special_rsva_title"></h1>
+    </header>
+
+
+    <div class="telecom-section-content"
+         data-ng-if="!AliasSpecialRsvaCtrl.isLoading">
+
+        <toast-message></toast-message>
+
+        <div class="row">
+            <div class="col-md-8 widget-presentation">
+                <div class="alert alert-info"
+                     role="alert">
+                    <span data-translate="telephony_alias_special_rsva_topology_info"></span>
+                </div>
+
+                <form name="rsvaForm"
+                      data-ng-submit="AliasSpecialRsvaCtrl.applyChanges()"
+                      novalidate>
+                    <div>
+                        <div class="oui-header_5 mt-4"
+                             data-translate="telephony_alias_special_rsva_number_fee_title"></div>
+                        <p data-translate="telephony_alias_special_rsva_number_fee_description"
+                           data-translate-values="{price: AliasSpecialRsvaCtrl.tariffBearingPrice}"></p>
+                        <div class="form-group">
+                            <label class="control-label"
+                                   data-ng-if="!AliasSpecialRsvaCtrl.isEditing"
+                                   data-translate="telephony_alias_special_rsva_tariff_bearing_desc_label">
+                            </label>
+                            <label for="rsvaTariffBearingForm"
+                                   class="control-label"
+                                   data-ng-if="AliasSpecialRsvaCtrl.isEditing"
+                                   data-translate="telephony_alias_special_rsva_tariff_bearing_label">
+                            </label>
+                            <select id="rsvaTariffBearingForm"
+                                    name="rsvaTariffBearingForm"
+                                    class="form-control"
+                                    required
+                                    data-ng-if="AliasSpecialRsvaCtrl.isEditing"
+                                    data-ng-model="AliasSpecialRsvaCtrl.rsvaForm.rateCode"
+                                    data-ng-change="AliasSpecialRsvaCtrl.onChangeTariffBearing()"
+                                    data-ng-options="rateCode.code + AliasSpecialRsvaCtrl.additionalInfos(rateCode) for rateCode in AliasSpecialRsvaCtrl.allowedRateCodes">
+                                <option data-translate="telephony_alias_special_rsva_tariff_bearing_undefined_value"></option>
+                            </select>
+                            <p class="form-control-static"
+                               data-ng-if="!AliasSpecialRsvaCtrl.isEditing"
+                               data-ng-bind="AliasSpecialRsvaCtrl.rsvaForm.rateCode.code || '-'">
+                            </p>
+                            <div class="checkbox"
+                                 data-ng-if="AliasSpecialRsvaCtrl.isEditing && AliasSpecialRsvaCtrl.rateCodeChanged">
+                                <label>
+                                    <input type="checkbox"
+                                           id="editLogged"
+                                           name="editLogged"
+                                           data-ng-model="AliasSpecialRsvaCtrl.tariffBearingChangeAgreed" />
+                                    <span data-translate="telephony_alias_special_rsva_tariff_bearing_changed_checkbox"
+                                          data-translate-values="{price: AliasSpecialRsvaCtrl.tariffBearingPrice}"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                             data-ng-if="!AliasSpecialRsvaCtrl.isEditing && !AliasSpecialRsvaCtrl.rateCodeChanged && AliasSpecialRsvaCtrl.rateCodeInfos.pricePerCallWithoutTax.value">
+                            <label class="control-label"
+                                   data-translate="telephony_alias_special_rsva_tariff_bearing_calling_price_label">
+                            </label>
+                            <p class="form-control-static"
+                               data-ng-bind="AliasSpecialRsvaCtrl.rateCodeInfos.pricePerCallWithoutTax.text + ' HT'">
+                            </p>
+                        </div>
+                        <div class="form-group"
+                             data-ng-if="!AliasSpecialRsvaCtrl.isEditing && !AliasSpecialRsvaCtrl.rateCodeChanged && AliasSpecialRsvaCtrl.rateCodeInfos.repaymentPricePerCallWithoutTax.value">
+                            <label class="control-label"
+                                   data-translate="telephony_alias_special_rsva_tariff_bearing_transfer_price_label">
+                            </label>
+                            <p class="form-control-static"
+                               data-ng-bind="AliasSpecialRsvaCtrl.rateCodeInfos.repaymentPricePerCallWithoutTax.text + ' HT'">
+                            </p>
+                        </div>
+                        <div class="row"
+                             data-ng-if="!AliasSpecialRsvaCtrl.isEditing">
+                            <div class="oui-tile col-md-10"
+                                 data-ng-if="AliasSpecialRsvaCtrl.scheduledRateCode">
+                                <div class="oui-header_5 oui-tile__title"
+                                    data-translate="telephony_alias_special_rsva_scheduled_title"
+                                    data-translate-values="{date: AliasSpecialRsvaCtrl.formattedEffectiveDatetime}">
+                                </div>
+                                <div class="oui-tile__body">
+                                    <div class="form-group mx-5">
+                                        <label class="control-label"
+                                               data-translate="telephony_alias_special_rsva_scheduled_rate_code_label">
+                                        </label>
+                                        <p class="form-control-static"
+                                           data-ng-bind="AliasSpecialRsvaCtrl.scheduledRateCode.rateCode">
+                                        </p>
+                                    </div>
+                                    <div class="form-group mx-5"
+                                         data-ng-if="AliasSpecialRsvaCtrl.scheduledRateCode.pricePerCallWithoutTax.value">
+                                        <label class="control-label"
+                                               data-translate="telephony_alias_special_rsva_scheduled_calling_price_label">
+                                        </label>
+                                        <p class="form-control-static"
+                                           data-ng-bind="AliasSpecialRsvaCtrl.scheduledRateCode.pricePerCallWithoutTax.text + ' HT'">
+                                        </p>
+                                    </div>
+                                    <div class="form-group mx-5"
+                                         data-ng-if="AliasSpecialRsvaCtrl.scheduledRateCode.pricePerMinuteWithoutTax.value">
+                                        <label class="control-label"
+                                               data-translate="telephony_alias_special_rsva_scheduled_calling_price_label">
+                                        </label>
+                                        <p class="form-control-static"
+                                           data-ng-bind="AliasSpecialRsvaCtrl.scheduledRateCode.pricePerMinuteWithoutTax.text + ' HT'">
+                                        </p>
+                                    </div>
+                                    <div class="form-group mx-5"
+                                         data-ng-if="AliasSpecialRsvaCtrl.scheduledRateCode.repaymentPricePerCallWithoutTax.value">
+                                        <label class="control-label"
+                                               data-translate="telephony_alias_special_rsva_scheduled_transfer_price_label">
+                                        </label>
+                                        <p class="form-control-static"
+                                           data-ng-bind="AliasSpecialRsvaCtrl.scheduledRateCode.repaymentPricePerCallWithoutTax.text + ' HT'">
+                                        </p>
+                                    </div>
+                                    <div class="form-group mx-5"
+                                         data-ng-if="AliasSpecialRsvaCtrl.scheduledRateCode.repaymentPricePerMinuteWithoutTax.value">
+                                        <label class="control-label"
+                                               data-translate="telephony_alias_special_rsva_scheduled_transfer_price_label">
+                                        </label>
+                                        <p class="form-control-static"
+                                           data-ng-bind="AliasSpecialRsvaCtrl.scheduledRateCode.repaymentPricePerMinuteWithoutTax.text + ' HT'">
+                                        </p>
+                                    </div>
+                                    <div class="form-group mx-5">
+                                        <label class="control-label"
+                                               data-translate="telephony_alias_special_rsva_scheduled_effective_date_label">
+                                        </label>
+                                        <p class="form-control-static"
+                                           data-ng-bind="AliasSpecialRsvaCtrl.formattedEffectiveDatetime">
+                                        </p>
+                                    </div>
+                                    <div class="form-group mx-5">
+                                        <label class="control-label"
+                                               data-translate="telephony_alias_special_rsva_scheduled_effective_date_label">
+                                        </label>
+                                        <p class="form-control-static"
+                                           data-ng-bind="AliasSpecialRsvaCtrl.formattedCancelLimitDatetime">
+                                        </p>
+                                    </div>
+                                    <div class="form-group mx-5">
+                                        <label class="control-label"
+                                               data-translate="telephony_alias_special_rsva_scheduled_update_price_label">
+                                        </label>
+                                        <p class="form-control-static"
+                                           data-ng-bind="AliasSpecialRsvaCtrl.scheduledRateCode.updateRateCodePriceWithoutTax.text + ' HT'">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="oui-header_5  mt-4"
+                             data-translate="telephony_alias_special_rsva_infos_title"></div>
+                        <div class="form-group">
+                            <label class="control-label"
+                                 data-translate="telephony_alias_special_rsva_infos_siret_label">
+                            </label>
+                            <p class="form-control-static"
+                               data-ng-bind="AliasSpecialRsvaCtrl.rsvaInfos.siret">
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"
+                                 data-translate="telephony_alias_special_rsva_infos_email_label">
+                            </label>
+                            <p class="form-control-static"
+                               data-ng-bind="AliasSpecialRsvaCtrl.rsvaInfos.email">
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvaTypologyForm"
+                                   class="control-label"
+                                   data-translate="telephony_alias_special_rsva_infos_typology_label">
+                            </label>
+                            <select id="rsvaTypologyForm"
+                                    name="rsvaTypologyForm"
+                                    class="form-control"
+                                    required
+                                    data-ng-if="AliasSpecialRsvaCtrl.isEditing"
+                                    data-ng-model="AliasSpecialRsvaCtrl.rsvaForm.typology"
+                                    data-ng-options="typonomy.label for typonomy in AliasSpecialRsvaCtrl.typologies">
+                            </select>
+                            <p class="form-control-static"
+                               data-ng-if="!AliasSpecialRsvaCtrl.isEditing"
+                               data-ng-bind="AliasSpecialRsvaCtrl.rsvaForm.typology.label">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <hr/>
+                        <telephony-bulk-action data-billing-account="{{ AliasSpecialRsvaCtrl.bulkDatas.billingAccount }}"
+                                               data-service-name="{{ AliasSpecialRsvaCtrl.bulkDatas.serviceName }}"
+                                               data-custom-class="link d-block pl-0 mb-3"
+                                               data-ng-disabled="AliasSpecialRsvaCtrl.isLoading"
+                                               data-bulk-infos="AliasSpecialRsvaCtrl.bulkDatas.infos"
+                                               data-filter-services="AliasSpecialRsvaCtrl.filterServices"
+                                               data-get-bulk-params="AliasSpecialRsvaCtrl.getBulkParams"
+                                               data-on-success="AliasSpecialRsvaCtrl.onBulkSuccess"
+                                               data-on-error="AliasSpecialRsvaCtrl.onBulkError">
+                        </telephony-bulk-action>
+                        <button type="button"
+                                class="btn btn-default"
+                                data-ng-if="!AliasSpecialRsvaCtrl.isEditing"
+                                data-translate="telephony_alias_special_rsva_edit"
+                                data-ng-click="AliasSpecialRsvaCtrl.isEditing = true">
+                        </button>
+                        <button type="submit"
+                                class="btn btn-primary"
+                                data-ng-if="AliasSpecialRsvaCtrl.isEditing"
+                                data-ng-disabled="!AliasSpecialRsvaCtrl.hasChanges()">
+                            <oui-spinner class="mr-2"
+                                         data-ng-if="AliasSpecialRsvaCtrl.isUpdating"
+                                         data-size="s">
+                            </oui-spinner>
+                            <span data-translate="telephony_alias_special_rsva_apply"></span>
+                        </button>
+                        <button type="button"
+                                class="btn btn-link"
+                                data-ng-if="AliasSpecialRsvaCtrl.isEditing"
+                                data-translate="cancel"
+                                data-ng-click="AliasSpecialRsvaCtrl.cancelEdition()">
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 widget-presentation">
+                <div class="oui-tile h-100">
+                    <h2 class="oui-header_2 oui-tile__title"
+                        data-translate="telephony_alias_special_rsva_docs_title">
+                    </h2>
+                    <ul class="oui-tile__body list-unstyled">
+                        <li class="oui-tile__item oui-tile__item_button">
+                            <a class="oui-tile__button oui-button oui-button_link oui-button_icon-right oui-button_full-width"
+                               title="{{ ::'telephony_alias_special_rsva_docs_transfer_table' | translate }} {{ ::'common_newtab' | translate }}"
+                               target="_blank"
+                               rel="noopener"
+                               data-ng-href="{{ AliasSpecialRsvaCtrl.links.transferTable }}">
+                                <span class="text-link"
+                                      data-translate="telephony_alias_special_rsva_docs_transfer_table">
+                                </span>
+                                <i class="fa fa-icon fa-external-link" aria-hidden="true"></i>
+                                <i class="oui-icon oui-icon-chevron-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="oui-tile__item oui-tile__item_button">
+                            <a class="oui-tile__button oui-button oui-button_link oui-button_icon-right oui-button_full-width"
+                               title="{{ ::'telephony_alias_special_rsva_docs_deontology' | translate }} {{ ::'common_newtab' | translate }}"
+                               target="_blank"
+                               rel="noopener"
+                               data-ng-href="{{ AliasSpecialRsvaCtrl.links.deontology }}">
+                                <span class="text-link"
+                                      data-translate="telephony_alias_special_rsva_docs_deontology">
+                                </span>
+                                <i class="fa fa-icon fa-external-link" aria-hidden="true"></i>
+                                <i class="oui-icon oui-icon-chevron-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="oui-tile__item oui-tile__item_button">
+                            <a class="oui-tile__button oui-button oui-button_link oui-button_icon-right oui-button_full-width"
+                               title="{{ ::'telephony_alias_special_rsva_docs_graphic_charter' | translate }} {{ ::'common_newtab' | translate }}"
+                               target="_blank"
+                               rel="noopener"
+                               data-ng-href="{{ AliasSpecialRsvaCtrl.links.graphicCharter }}">
+                                <span class="text-link"
+                                      data-translate="telephony_alias_special_rsva_docs_graphic_charter">
+                                </span>
+                                <i class="fa fa-icon fa-external-link" aria-hidden="true"></i>
+                                <i class="oui-icon oui-icon-chevron-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="oui-tile__item oui-tile__item_button">
+                            <a class="oui-tile__button oui-button oui-button_link oui-button_icon-right oui-button_full-width"
+                               title="{{ ::'telephony_alias_special_rsva_docs_sva_to_sva_plus' | translate }} {{ ::'common_newtab' | translate }}"
+                               target="_blank"
+                               rel="noopener"
+                               data-ng-href="{{ AliasSpecialRsvaCtrl.links.svaToSvaPlus }}">
+                                <span class="text-link"
+                                      data-translate="telephony_alias_special_rsva_docs_sva_to_sva_plus">
+                                </span>
+                                <i class="fa fa-icon fa-external-link" aria-hidden="true"></i>
+                                <i class="oui-icon oui-icon-chevron-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="text-center"
+         data-ng-if="AliasSpecialRsvaCtrl.isLoading">
+        <oui-spinner></oui-spinner>
+    </div>
+    <!-- /.telecom-section-content -->
+
+</section>
+<!-- /.telephony-group-alias-special-rsva -->
