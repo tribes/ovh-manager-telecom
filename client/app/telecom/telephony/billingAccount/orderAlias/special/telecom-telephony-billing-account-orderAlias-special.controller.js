@@ -236,6 +236,7 @@ angular.module("managerApp").controller("TelecomTelephonyAliasOrderSpecialCtrl",
                 self.form.firstname = user.firstname;
                 self.form.name = user.name;
                 self.form.organisation = user.organisation;
+                self.form.country = user.country;
                 return $q.all([
                     getRanges(user.country),
                     getTypologies(user.country)

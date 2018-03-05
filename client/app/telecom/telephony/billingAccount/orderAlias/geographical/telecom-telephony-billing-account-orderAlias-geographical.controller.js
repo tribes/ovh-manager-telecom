@@ -214,6 +214,7 @@ angular.module("managerApp").controller("TelecomTelephonyAliasOrderGeographicalC
                 self.form.name = user.name;
                 self.form.legalform = user.legalform;
                 self.form.organisation = user.organisation;
+                self.form.country = user.country;
                 return user;
             })
             .finally(
