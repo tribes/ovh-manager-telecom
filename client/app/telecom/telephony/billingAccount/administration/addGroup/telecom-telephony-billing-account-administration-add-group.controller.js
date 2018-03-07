@@ -1,4 +1,4 @@
-angular.module("managerApp").controller("TelecomTelephonyBillingAccountAdministrationAddGroup", function ($stateParams, $translate, $timeout, OvhApiOrderTelephony, ToastError) {
+angular.module("managerApp").controller("TelecomTelephonyBillingAccountAdministrationAddGroup", function ($state, $stateParams, $translate, $timeout, OvhApiOrderTelephony, ToastError) {
     "use strict";
 
     var self = this;
@@ -15,6 +15,10 @@ angular.module("managerApp").controller("TelecomTelephonyBillingAccountAdministr
         }).finally(function () {
             self.loading = false;
         });
+    };
+
+    self.back = function () {
+        return $state.go("telecom.telephony.administration");
     };
 
     self.getDisplayedPrice = function () {

@@ -10,7 +10,9 @@
         <oui-spinner size="l"></oui-spinner>
     </div>
 
-    <div class="telecom-section-content" data-ng-if="DeleteGroupCtrl.loaded">
+    <form class="telecom-section-content"
+          data-ng-if="DeleteGroupCtrl.loaded"
+          data-ng-submit="DeleteGroupCtrl.terminate()">
 
         <toast-message></toast-message>
 
@@ -37,14 +39,13 @@
 
         <oui-form-actions
             data-ng-if="!DeleteGroupCtrl.task"
-            data-on-submit="DeleteGroupCtrl.terminate()"
             data-submit-text="{{:: 'telephony_delete_group_delete' | translate}}"
             data-disabled="DeleteGroupCtrl.deleting"
             data-on-cancel="DeleteGroupCtrl.back()"
             data-cancel-text="{{:: 'cancel' | translate}}">
         </oui-form-actions>
 
-    </div>
+    </form>
     <!-- /.telecom-section-content -->
 
 </section>
