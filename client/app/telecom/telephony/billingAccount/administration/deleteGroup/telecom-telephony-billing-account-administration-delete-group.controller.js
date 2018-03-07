@@ -1,4 +1,4 @@
-angular.module("managerApp").controller("TelecomTelephonyBillingAccountAdministrationDeleteGroup", function ($stateParams, $q, $translate, OvhApiTelephony, Toast, ToastError) {
+angular.module("managerApp").controller("TelecomTelephonyBillingAccountAdministrationDeleteGroup", function ($state, $stateParams, $q, $translate, OvhApiTelephony, Toast, ToastError) {
     "use strict";
 
     var self = this;
@@ -30,6 +30,10 @@ angular.module("managerApp").controller("TelecomTelephonyBillingAccountAdministr
             self.group = group;
         });
     }
+
+    self.back = function () {
+        return $state.go("telecom.telephony.administration");
+    };
 
     self.cancelTermination = function () {
         self.cancelling = true;
