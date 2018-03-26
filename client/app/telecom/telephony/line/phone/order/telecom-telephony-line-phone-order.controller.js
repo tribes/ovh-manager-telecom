@@ -1,4 +1,4 @@
-angular.module("managerApp").controller("TelecomTelephonyLinePhoneOrderCtrl", function ($q, $scope, $stateParams, $translate, IpAddress, TelephonyMediator, OvhApiTelephony, OvhApiOrder, Toast, ToastError, TELEPHONY_RMA) {
+angular.module("managerApp").controller("TelecomTelephonyLinePhoneOrderCtrl", function ($q, $scope, $stateParams, $translate, IpAddress, TelephonyMediator, OvhApiMe, OvhApiTelephony, OvhApiOrder, Toast, ToastError, TELEPHONY_RMA) {
     "use strict";
 
     var self = this;
@@ -8,7 +8,7 @@ angular.module("managerApp").controller("TelecomTelephonyLinePhoneOrderCtrl", fu
 
     function fetchOfferPhones (offer) {
         return OvhApiTelephony.v6().getLineOfferPhones({
-            country: "fr",
+            country: self.user.country.toLowerCase(),
             offer: offer
         }).$promise;
     }
@@ -104,7 +104,7 @@ angular.module("managerApp").controller("TelecomTelephonyLinePhoneOrderCtrl", fu
         self.contactChoiceOptions = {
             filter: filterContact
         };
-
+        self.user = null;
         self.macAddress = null;
         self.line = null;
         self.phone = null;
@@ -122,6 +122,11 @@ angular.module("managerApp").controller("TelecomTelephonyLinePhoneOrderCtrl", fu
                 serviceName: self.line.serviceName
             }).$promise.then(function (result) {
                 _.assign(self.line, { getPublicOffer: result.getPublicOffer }, { isAttachedToOtherLinesPhone: result.isAttachedToOtherLinesPhone });
+            });
+        }).then(function () {
+            return OvhApiMe.Lexi().get().$promise.then(function (user) {
+                self.user = user;
+                return user;
             });
         }).then(function () {
             return self.line.hasPendingOfferTasks();
