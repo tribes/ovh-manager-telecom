@@ -8,7 +8,7 @@ angular.module("managerApp").controller("TelecomTelephonyLinePhoneOrderCtrl", fu
 
     function fetchOfferPhones (offer) {
         return OvhApiTelephony.v6().getLineOfferPhones({
-            country: self.user.country.toLowerCase(),
+            country: _.get(self.user, "country", "fr").toLowerCase(),
             offer: offer
         }).$promise;
     }
