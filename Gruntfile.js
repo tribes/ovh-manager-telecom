@@ -1,5 +1,7 @@
 "use strict";
 
+var dependencies = require("./dependencies.json");
+
 module.exports = function (grunt) {
     var localConfig;
     try {
@@ -42,7 +44,7 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON("package.json"),
         yeoman: {
             // configurable paths
-            client: require("./bower.json").appPath || "client",
+            client: "client",
             server: "server",
             dist: "dist",
             tmp: ".tmp"
@@ -92,11 +94,11 @@ module.exports = function (grunt) {
             },
             tpl_index: {
                 files: ["<%= yeoman.client %>/index.tpl.html"],
-                tasks: ["copy:tpl_index", "wiredep:client", "injector:scripts", "injector:css"]
+                tasks: ["copy:tpl_index", "injector:scripts", "injector:css", "injector:bowerjs", "injector:bowercss"]
             },
             tpl_karma: {
                 files: ["karma.conf.tpl.js"],
-                tasks: ["copy:tpl_karma", "wiredep:test"]
+                tasks: ["copy:tpl_karma"]
             },
             injectJS: {
                 files: [
@@ -124,7 +126,7 @@ module.exports = function (grunt) {
                 files: [
                     "<%= yeoman.client %>/{app,components}/**/*.{spec,mock}.js"
                 ],
-                tasks: ["newer:eslint:all", "wiredep:test", "karma"]
+                tasks: ["newer:eslint:all", "karma"]
             },
 
             less: {
@@ -164,11 +166,6 @@ module.exports = function (grunt) {
                 options: {
                     livereload: true
                 }
-            },
-
-            bower: {
-                files: ["bower.json"],
-                tasks: ["wiredep"]
             }
         },
 
@@ -258,35 +255,6 @@ module.exports = function (grunt) {
                         "<%= yeoman.tmp %>/app/app.css"
                     ]
                 }
-            }
-        },
-
-        //#######################################################################################
-        //##      TASK: wiredep                                                                ##
-        //##            Automatically inject Bower components into the app and karma.conf.js   ##
-        //#######################################################################################
-        wiredep: {
-            options: {
-                exclude: [
-                    "bower_components/flag-icon-css/css/flag-icon.min.css",
-                    "/json3/",
-                    "/es5-shim/",
-                    "/cryptojs/",
-                    "bower_components/messenger/build/css/messenger-theme-air.css",
-                    "bower_components/messenger/build/css/messenger-theme-ice.css"
-                ]
-            },
-            client: {
-                src: "<%= yeoman.client %>/index.html",
-                ignorePath: "<%= yeoman.client %>/"
-            },
-            less: {
-                src: "<%= yeoman.client %>/app/app.less",
-                ignorePath: "../bower_components/"
-            },
-            test: {
-                src: "./karma.conf.js",
-                devDependencies: true
             }
         },
 
@@ -726,6 +694,34 @@ module.exports = function (grunt) {
                         "<%= yeoman.client %>/{app,components}/**/*.css"
                     ]
                 }
+            },
+
+            bowercss: {
+                options: {
+                    transform: function (filePath) {
+                        filePath = filePath.replace("/node_modules", "node_modules");
+                        return "<link rel=\"stylesheet\" href=\"" + filePath + "\">";
+                    },
+                    starttag: "<!-- injector:bowercss -->",
+                    endtag: "<!-- endinjector:bowercss -->"
+                },
+                files: {
+                    "<%= yeoman.client %>/index.html": dependencies.css
+                }
+            },
+
+            bowerjs: {
+                options: {
+                    transform: function (filePath) {
+                        filePath = filePath.replace("/node_modules", "node_modules");
+                        return "<script src=\"" + filePath + "\"></script>";
+                    },
+                    starttag: "<!-- injector:bowerjs -->",
+                    endtag: "<!-- endinjector:bowerjs -->"
+                },
+                files: {
+                    "<%= yeoman.client %>/index.html": dependencies.js
+                }
             }
         },
 
@@ -904,8 +900,6 @@ module.exports = function (grunt) {
             "ngconstant",
             "concurrent:templates",
             "injector",
-            "wiredep:less",
-            "wiredep:client",
             "less",
             "sass",
             "postcss",
@@ -932,8 +926,6 @@ module.exports = function (grunt) {
             "ngconstant",
             "concurrent:templates",
             "copy:test",
-            "wiredep:client",
-            "wiredep:test",
             "eslint:all",
             "karma:unit"
         ]);
@@ -953,8 +945,6 @@ module.exports = function (grunt) {
         "ngconstant",
         "concurrent:templates",
         "injector",
-        "wiredep:less",
-        "wiredep:client",
         "concurrent:dist",
         "useminPrepare",
         "postcss",
