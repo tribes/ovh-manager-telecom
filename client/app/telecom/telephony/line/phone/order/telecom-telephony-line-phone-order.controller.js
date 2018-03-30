@@ -7,10 +7,15 @@ angular.module("managerApp").controller("TelecomTelephonyLinePhoneOrderCtrl", fu
     self.rmaStatusUrl = TelephonyMediator.getV6ToV4RedirectionUrl("line.line_sav_rma_status");
 
     function fetchOfferPhones (offer) {
-        return OvhApiTelephony.v6().getLineOfferPhones({
-            country: _.get(self.user, "country", "fr").toLowerCase(),
-            offer: offer
-        }).$promise;
+        return OvhApiTelephony.v6().schema().$promise.then(function (schema) {
+            var userCountry = _.get(self.user, "country", "fr").toLowerCase();
+            var countryParam = schema.models["telephony.NumberCountryEnum"].enum.indexOf(userCountry) > -1 ? userCountry : "fr";
+
+            return OvhApiTelephony.v6().getLineOfferPhones({
+                country: countryParam,
+                offer: offer
+            }).$promise;
+        });
     }
 
     function fetchMerchandiseAvailable () {
@@ -117,17 +122,18 @@ angular.module("managerApp").controller("TelecomTelephonyLinePhoneOrderCtrl", fu
         TelephonyMediator.getGroup($stateParams.billingAccount).then(function (group) {
             self.line = group.getLine($stateParams.serviceName);
         }).then(function () {
-            return OvhApiTelephony.Line().v6().get({
-                billingAccount: self.line.billingAccount,
-                serviceName: self.line.serviceName
-            }).$promise.then(function (result) {
-                _.assign(self.line, { getPublicOffer: result.getPublicOffer }, { isAttachedToOtherLinesPhone: result.isAttachedToOtherLinesPhone });
-            });
-        }).then(function () {
-            return OvhApiMe.Lexi().get().$promise.then(function (user) {
-                self.user = user;
-                return user;
-            });
+            return $q.all([
+                OvhApiTelephony.Line().v6().get({
+                    billingAccount: self.line.billingAccount,
+                    serviceName: self.line.serviceName
+                }).$promise.then(function (result) {
+                    _.assign(self.line, { getPublicOffer: result.getPublicOffer }, { isAttachedToOtherLinesPhone: result.isAttachedToOtherLinesPhone });
+                }),
+                OvhApiMe.v6().get().$promise.then(function (user) {
+                    self.user = user;
+                    return user;
+                })
+            ]);
         }).then(function () {
             return self.line.hasPendingOfferTasks();
         }).then(function (hasPendingOfferTasks) {
