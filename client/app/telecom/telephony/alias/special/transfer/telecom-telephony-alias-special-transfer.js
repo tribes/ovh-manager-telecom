@@ -4,7 +4,7 @@ angular.module("managerApp").config(function ($stateProvider) {
     $stateProvider.state("telecom.telephony.alias.special.transfer", {
         url: "/transfer",
         views: {
-            "@aliasView": {
+            "aliasView@telecom.telephony.alias": {
                 templateUrl: "app/telecom/telephony/alias/special/transfer/telecom-telephony-alias-special-transfer.html",
                 controller: "TelecomTelephonyAliasSpecialTransferCtrl",
                 controllerAs: "AliasSpecialTransferCtrl"

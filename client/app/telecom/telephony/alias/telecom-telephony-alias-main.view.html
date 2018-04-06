@@ -48,6 +48,7 @@
                 </responsive-tab>
 
                 <responsive-tab data-state="telecom.telephony.alias.special"
+                                data-ng-if="AliasCtrl.isSpecialNumber"
                                 data-disabled="!AliasCtrl.serviceName"
                                 data-dropdown-title="{{ 'telephony_alias_tab_special' | translate }}">
                     <span data-translate="telephony_alias_tab_special"></span>

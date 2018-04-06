@@ -22,6 +22,8 @@
    <translation id="telephony_alias_special_rsva_scheduled_cancel_date_label">Date limite d'annulation</translation>
    <translation id="telephony_alias_special_rsva_scheduled_update_price_label">Coût du changement</translation>
 
+   <translation id="telephony_alias_special_rsva_loading_error">Une erreur est survenue lors de la récupération des informations</translation>
+
    <translation id="telephony_alias_special_rsva_infos_title">Renseignements du numéro à l'attention du consommateur</translation>
    <translation id="telephony_alias_special_rsva_infos_siret_label">Siret</translation>
    <translation id="telephony_alias_special_rsva_infos_email_label">Email</translation>
@@ -40,6 +42,7 @@
    <translation id="telephony_alias_special_rsva_edit">Gérer</translation>
    <translation id="telephony_alias_special_rsva_apply">Valider</translation>
    <translation id="telephony_alias_special_rsva_success">Options enregistrées</translation>
+   <translation id="telephony_alias_special_rsva_error">Une erreur est survenue lors de la mise à jour de la tarification</translation>
 
    <translation id="telephony_alias_special_rsva_docs_title">En savoir plus</translation>
    <translation id="telephony_alias_special_rsva_docs_transfer_table">Tableau de reversement par paliers tarifaires</translation>

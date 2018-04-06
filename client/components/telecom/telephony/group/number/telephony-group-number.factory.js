@@ -182,6 +182,15 @@ angular.module("managerApp").factory("TelephonyGroupNumber", function ($q, $inje
         });
     };
 
+    TelephonyGroupNumber.prototype.isSpecialNumber = function () {
+        var self = this;
+        return OvhApiTelephony.Rsva().Lexi().getCurrentRateCode({
+            billingAccount: self.billingAccount,
+            serviceName: self.serviceName
+        }).$promise.then(function () { return $q.when(true); })
+            .catch(function () { return $q.when(false); });
+    };
+
     /* ----------  EDITION  ----------*/
 
     TelephonyGroupNumber.prototype.startEdition = function (startFeatureEdition) {
