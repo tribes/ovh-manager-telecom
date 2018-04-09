@@ -8,7 +8,7 @@
    <translation id="telephony_alias_special_fees_operator_filter">Opérateur</translation>
    <translation id="telephony_alias_special_fees_price_filter">Montant (€)</translation>
    <translation id="telephony_alias_special_fees_total">Total</translation>
-   <translation id="telephony_alias_special_fees_calls">{{calls}} appel{{calls > 1 ? 's': ''}}</translation>
+   <translation id="telephony_alias_special_fees_calls">{{calls}} appel</translation>
    <translation id="telephony_alias_special_fees_duration">{{duration}} sec.</translation>
    <translation id="telephony_alias_special_fees_price">{{price}} HT</translation>
 </translations>

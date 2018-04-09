@@ -22,7 +22,7 @@
                        ui-sref="telecom.telephony.alias.special.fees"
                        data-translate="telephony_alias_special_transfer_description_link"></a>
                 </div>
-                <table class="table table-condensed">
+                <table class="table">
                     <thead>
                         <tr>
                             <th style="width: 45px;">&nbsp;</th>
@@ -131,7 +131,12 @@
                                 data-translate="telephony_alias_special_transfer_total">
                             </th>
                             <td class="font-weight-bold"
-                                data-ng-bind="'telephony_alias_special_transfer_calls' | translate: {calls: AliasSpecialTransferCtrl.totalRepayment.calls || 0}"></td>
+                                data-ng-pluralize
+                                count="AliasSpecialTransferCtrl.totalRepayment.calls || 0"
+                                when="{'0': ('telephony_alias_special_transfer_calls' | translate: { calls: AliasSpecialTransferCtrl.calls}),
+                                       'one': ('telephony_alias_special_transfer_calls' | translate: { calls: AliasSpecialTransferCtrl.calls}),
+                                       'other': ('telephony_alias_special_transfer_calls' | translate: { calls: AliasSpecialTransferCtrl.calls}) + 's'}"
+                                ></td>
                             <td colspan="2"
                                 class="font-weight-bold"
                                 data-ng-bind="'telephony_alias_special_transfer_duration' | translate: {duration: AliasSpecialTransferCtrl.totalRepayment.duration || 0}"></td>

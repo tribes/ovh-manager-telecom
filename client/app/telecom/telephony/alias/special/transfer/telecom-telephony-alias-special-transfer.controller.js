@@ -20,16 +20,16 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialTransferCtr
         };
 
         self.isLoading = true;
-        OvhApiTelephony.Rsva().Lexi().getCurrentRateCode({
+        OvhApiTelephony.Rsva().v6().getCurrentRateCode({
             billingAccount: $stateParams.billingAccount,
             serviceName: $stateParams.serviceName
         }).$promise.then(function () {
-            OvhApiTelephonyService.RepaymentConsumption().Lexi().query({
+            OvhApiTelephonyService.RepaymentConsumption().v6().query({
                 billingAccount: $stateParams.billingAccount,
                 serviceName: $stateParams.serviceName
             }).$promise.then(function (repayments) {
                 _.each(repayments, function (repayment) {
-                    OvhApiTelephonyService.RepaymentConsumption().Lexi().get({
+                    OvhApiTelephonyService.RepaymentConsumption().v6().get({
                         billingAccount: $stateParams.billingAccount,
                         serviceName: $stateParams.serviceName,
                         consumptionId: repayment

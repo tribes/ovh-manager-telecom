@@ -20,16 +20,16 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialFeesCtrl", 
         };
 
         self.isLoading = true;
-        OvhApiTelephony.Rsva().Lexi().getCurrentRateCode({
+        OvhApiTelephony.Rsva().v6().getCurrentRateCode({
             billingAccount: $stateParams.billingAccount,
             serviceName: $stateParams.serviceName
         }).$promise.then(function () {
-            OvhApiTelephonyService.RepaymentConsumption().Lexi().query({
+            OvhApiTelephonyService.RepaymentConsumption().v6().query({
                 billingAccount: $stateParams.billingAccount,
                 serviceName: $stateParams.serviceName
             }).$promise.then(function (fees) {
                 _.each(fees, function (fee) {
-                    OvhApiTelephonyService.RepaymentConsumption().Lexi().get({
+                    OvhApiTelephonyService.RepaymentConsumption().v6().get({
                         billingAccount: $stateParams.billingAccount,
                         serviceName: $stateParams.serviceName,
                         consumptionId: fee

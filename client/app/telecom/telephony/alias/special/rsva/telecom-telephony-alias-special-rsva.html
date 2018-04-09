@@ -16,16 +16,16 @@
         <div class="row">
             <div class="col-md-8 widget-presentation">
                 <div class="alert alert-info"
-                     role="alert">
-                    <span data-translate="telephony_alias_special_rsva_topology_info"></span>
+                     role="alert"
+                     data-translate="telephony_alias_special_rsva_topology_info">
                 </div>
 
                 <form name="rsvaForm"
                       data-ng-submit="AliasSpecialRsvaCtrl.applyChanges()"
                       novalidate>
-                    <div>
-                        <div class="oui-header_5 mt-4"
-                             data-translate="telephony_alias_special_rsva_number_fee_title"></div>
+                    <fieldset class="widget-presentation">
+                        <legend class="h2 widget-presentation-title"
+                                data-translate="telephony_alias_special_rsva_number_fee_title"></legend>
                         <p data-translate="telephony_alias_special_rsva_number_fee_description"
                            data-translate-values="{price: AliasSpecialRsvaCtrl.tariffBearingPrice}"></p>
                         <div class="form-group">
@@ -162,11 +162,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div>
-                        <div class="oui-header_5  mt-4"
-                             data-translate="telephony_alias_special_rsva_infos_title"></div>
+                    </fieldset>
+                    <fieldset class="widget-presentation">
+                        <legend class="h2 widget-presentation-title"
+                                data-translate="telephony_alias_special_rsva_infos_title"></legend>
                         <div class="form-group">
                             <label class="control-label"
                                  data-translate="telephony_alias_special_rsva_infos_siret_label">
@@ -201,7 +200,7 @@
                                data-ng-bind="AliasSpecialRsvaCtrl.rsvaForm.typology.label">
                             </p>
                         </div>
-                    </div>
+                    </fieldset>
                     <div class="form-group">
                         <hr/>
                         <telephony-bulk-action data-service-type="alias"
@@ -302,7 +301,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="text-center"
          data-ng-if="AliasSpecialRsvaCtrl.isLoading">

@@ -10,7 +10,7 @@
    <translation id="telephony_alias_special_transfer_operator_filter">Opérateur</translation>
    <translation id="telephony_alias_special_transfer_price_filter">Montant (€)</translation>
    <translation id="telephony_alias_special_transfer_total">Total</translation>
-   <translation id="telephony_alias_special_transfer_calls">{{calls}} appel{{calls > 1 ? 's': ''}}</translation>
+   <translation id="telephony_alias_special_transfer_calls">{{calls}} appel</translation>
    <translation id="telephony_alias_special_transfer_duration">{{duration}} sec.</translation>
    <translation id="telephony_alias_special_transfer_price">{{price}} HT</translation>
    <translation id="telephony_alias_special_transfer_button">Accéder à la demande de reversement</translation>

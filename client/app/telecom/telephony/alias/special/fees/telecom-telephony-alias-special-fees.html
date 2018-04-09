@@ -17,124 +17,126 @@
                  data-ng-if="!AliasSpecialFeesCtrl.isLoading">
                 <table class="table table-condensed">
                     <thead>
-                    <tr>
-                        <th style="width: 45px;">&nbsp;</th>
-                        <th scope="col">
-                            <button type="button"
-                                    class="btn btn-link p-0"
-                                    data-translate-attr="{ title: 'telephony_alias_special_fees_date_filter' }"
-                                    data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
-                                    data-ng-click="AliasSpecialFeesCtrl.orderBy('date')">
-                                <span data-translate="telephony_alias_special_fees_date_filter"></span>
-                                <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                        <tr>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_fees_date_filter' }"
+                                        data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
+                                        data-ng-click="AliasSpecialFeesCtrl.orderBy('date')">
+                                    <span data-translate="telephony_alias_special_fees_date_filter"></span>
+                                    <span>
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'date' && AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                        </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'date' && !AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
+                                        </span>
                                     </span>
-                            </button>
-                        </th>
-                        <th scope="col">
-                            <button type="button"
-                                    class="btn btn-link p-0"
-                                    data-translate-attr="{ title: 'telephony_alias_special_fees_calling_filter' }"
-                                    data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
-                                    data-ng-click="AliasSpecialFeesCtrl.orderBy('calling')">
-                                <span data-translate="telephony_alias_special_fees_calling_filter"></span>
-                                <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                </button>
+                            </th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_fees_calling_filter' }"
+                                        data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
+                                        data-ng-click="AliasSpecialFeesCtrl.orderBy('calling')">
+                                    <span data-translate="telephony_alias_special_fees_calling_filter"></span>
+                                    <span>
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'calling' && AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                        </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'calling' && !AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
+                                        </span>
                                     </span>
-                            </button>
-                        </th>
-                        <th scope="col">
-                            <button type="button"
-                                    class="btn btn-link p-0"
-                                    data-translate-attr="{ title: 'telephony_alias_special_fees_duration_filter' }"
-                                    data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
-                                    data-ng-click="AliasSpecialFeesCtrl.orderBy('duration')">
-                                <span data-translate="telephony_alias_special_fees_duration_filter"></span>
-                                <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                </button>
+                            </th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_fees_duration_filter' }"
+                                        data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
+                                        data-ng-click="AliasSpecialFeesCtrl.orderBy('duration')">
+                                    <span data-translate="telephony_alias_special_fees_duration_filter"></span>
+                                    <span>
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'duration' && AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                        </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'duration' && !AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
+                                        </span>
                                     </span>
-                            </button>
-                        </th>
-                        <th scope="col">
-                            <button type="button"
-                                    class="btn btn-link p-0"
-                                    data-translate-attr="{ title: 'telephony_alias_special_fees_operator_filter' }"
-                                    data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
-                                    data-ng-click="AliasSpecialFeesCtrl.orderBy('operator')">
-                                <span data-translate="telephony_alias_special_fees_operator_filter"></span>
-                                <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                </button>
+                            </th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_fees_operator_filter' }"
+                                        data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
+                                        data-ng-click="AliasSpecialFeesCtrl.orderBy('operator')">
+                                    <span data-translate="telephony_alias_special_fees_operator_filter"></span>
+                                    <span>
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'operator' && AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                        </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'operator' && !AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
+                                        </span>
                                     </span>
-                            </button>
-                        </th>
-                        <th scope="col">
-                            <button type="button"
-                                    class="btn btn-link p-0"
-                                    data-translate-attr="{ title: 'telephony_alias_special_fees_price_filter' }"
-                                    data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
-                                    data-ng-click="AliasSpecialFeesCtrl.orderBy('price')">
-                                <span data-translate="telephony_alias_special_fees_price_filter"></span>
-                                <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                </button>
+                            </th>
+                            <th scope="col">
+                                <button type="button"
+                                        class="btn btn-link p-0"
+                                        data-translate-attr="{ title: 'telephony_alias_special_fees_price_filter' }"
+                                        data-ng-disabled="!AliasSpecialFeesCtrl.fees.length"
+                                        data-ng-click="AliasSpecialFeesCtrl.orderBy('price')">
+                                    <span data-translate="telephony_alias_special_fees_price_filter"></span>
+                                    <span>
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'price' && AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                        </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialFeesCtrl.state.orderBy === 'price' && !AliasSpecialFeesCtrl.state.orderDesc">
-                                        </i>
+                                        </span>
                                     </span>
-                            </button>
-                        </th>
-                    </tr>
+                                </button>
+                            </th>
+                        </tr>
                     </thead>
-                    <tbody>
-                    <tr data-ng-repeat="fee in AliasSpecialFeesCtrl.fees | orderBy:AliasSpecialFeesCtrl.state.orderBy:AliasSpecialFeesCtrl.state.orderDesc track by $index">
-                        <th style="width: 45px;">&nbsp;</th>
-                        <td data-ng-bind="fee.creationDatetime | date:'dd-MM-yyyy hh:mm:ss'"></td>
-                        <td data-ng-bind="fee.calling"></td>
-                        <td data-ng-bind="fee.duration"></td>
-                        <td data-ng-bind="fee.operator"></td>
-                        <td data-ng-bind="fee.price"></td>
-                    </tr>
-                    </tbody>
+                        <tbody>
+                            <tr data-ng-repeat="fee in AliasSpecialFeesCtrl.fees | orderBy:AliasSpecialFeesCtrl.state.orderBy:AliasSpecialFeesCtrl.state.orderDesc track by $index">
+                                <td data-ng-bind="fee.creationDatetime | date:'dd-MM-yyyy hh:mm:ss'"></td>
+                                <td data-ng-bind="fee.calling"></td>
+                                <td data-ng-bind="fee.duration"></td>
+                                <td data-ng-bind="fee.operator"></td>
+                                <td data-ng-bind="fee.price"></td>
+                            </tr>
+                        </tbody>
                     <tfoot>
-                    <tr>
-                        <th class="font-weight-bold"
-                            scope="row"
-                            colspan="2"
-                            data-translate="telephony_alias_special_fees_total">
-                        </th>
-                        <td class="font-weight-bold"
-                            data-ng-bind="'telephony_alias_special_fees_calls' | translate: {calls: AliasSpecialFeesCtrl.totalRepayment.calls || 0}"></td>
-                        <td colspan="2"
-                            class="font-weight-bold"
-                            data-ng-bind="'telephony_alias_special_fees_duration' | translate: {duration: AliasSpecialFeesCtrl.totalRepayment.duration || 0}"></td>
-                        <td class="font-weight-bold"
-                            data-ng-bind="'telephony_alias_special_fees_price' | translate: {price: AliasSpecialFeesCtrl.totalRepayment.price || 0}"></td>
-                    </tr>
+                        <tr>
+                            <td class="font-weight-bold"
+                                scope="row"
+                                colspan="2"
+                                data-translate="telephony_alias_special_fees_total">
+                            </td>
+                            <td class="font-weight-bold"
+                                data-ng-pluralize
+                                count="AliasSpecialFeesCtrl.totalRepayment.calls || 0"
+                                when="{'0': ('telephony_alias_special_fees_calls' | translate: { calls: AliasSpecialFeesCtrl.totalRepayment.calls }),
+                                       'one': ('telephony_alias_special_fees_calls' | translate: { calls: AliasSpecialFeesCtrl.totalRepayment.calls }),
+                                       'other': ('telephony_alias_special_fees_calls' | translate: { calls: AliasSpecialFeesCtrl.totalRepayment.calls }) + 's'}"></td>
+                            <td colspan="2"
+                                class="font-weight-bold"
+                                data-ng-bind="'telephony_alias_special_fees_duration' | translate: {duration: AliasSpecialFeesCtrl.totalRepayment.duration || 0}"></td>
+                            <td class="font-weight-bold"
+                                data-ng-bind="'telephony_alias_special_fees_price' | translate: {price: AliasSpecialFeesCtrl.totalRepayment.price || 0}"></td>
+                        </tr>
                     </tfoot>
                 </table>
             </div>
-            <div class="text-center"
+            <div class="col-md-6 text-center"
                  data-ng-if="AliasSpecialFeesCtrl.isLoading">
                 <oui-spinner></oui-spinner>
             </div>
