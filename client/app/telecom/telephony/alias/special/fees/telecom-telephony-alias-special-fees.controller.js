@@ -3,7 +3,7 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialFeesCtrl", 
 
     var self = this;
 
-    self.init = function () {
+    self.$onInit = function () {
 
         self.serviceName = $stateParams.serviceName;
         self.notSupported = false;
@@ -20,32 +20,28 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialFeesCtrl", 
         };
 
         self.isLoading = true;
-        OvhApiTelephony.Rsva().v6().getCurrentRateCode({
+
+        OvhApiTelephonyService.RepaymentConsumption().v6().query({
             billingAccount: $stateParams.billingAccount,
             serviceName: $stateParams.serviceName
-        }).$promise.then(function () {
-            OvhApiTelephonyService.RepaymentConsumption().v6().query({
-                billingAccount: $stateParams.billingAccount,
-                serviceName: $stateParams.serviceName
-            }).$promise.then(function (fees) {
-                _.each(fees, function (fee) {
-                    OvhApiTelephonyService.RepaymentConsumption().v6().get({
-                        billingAccount: $stateParams.billingAccount,
-                        serviceName: $stateParams.serviceName,
-                        consumptionId: fee
-                    }).$promise.then(function (data) {
-                        if (data.price < 0) {
-                            data.price = Math.abs(data.price);
-                            self.fees.push(data);
-                            self.totalRepayment.calls++;
-                            self.totalRepayment.duration += data.duration;
-                            self.totalRepayment.price += data.price;
-                        }
-                    });
+        }).$promise.then(function (fees) {
+            _.each(fees, function (fee) {
+                OvhApiTelephonyService.RepaymentConsumption().v6().get({
+                    billingAccount: $stateParams.billingAccount,
+                    serviceName: $stateParams.serviceName,
+                    consumptionId: fee
+                }).$promise.then(function (data) {
+                    if (data.price < 0) {
+                        data.price = Math.abs(data.price);
+                        self.fees.push(data);
+                        self.totalRepayment.calls++;
+                        self.totalRepayment.duration += data.duration;
+                        self.totalRepayment.price += data.price;
+                    }
                 });
-            }).finally(function () {
-                self.isLoading = false;
             });
+        }).finally(function () {
+            self.isLoading = false;
         });
     };
 
@@ -67,6 +63,4 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialFeesCtrl", 
         }
         self.applySorting();
     };
-
-    self.init();
 });

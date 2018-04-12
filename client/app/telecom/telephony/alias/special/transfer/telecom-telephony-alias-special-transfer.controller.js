@@ -3,7 +3,7 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialTransferCtr
 
     var self = this;
 
-    self.init = function () {
+    self.$onInit = function () {
 
         self.serviceName = $stateParams.serviceName;
         self.notSupported = false;
@@ -20,31 +20,26 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialTransferCtr
         };
 
         self.isLoading = true;
-        OvhApiTelephony.Rsva().v6().getCurrentRateCode({
+        OvhApiTelephonyService.RepaymentConsumption().v6().query({
             billingAccount: $stateParams.billingAccount,
             serviceName: $stateParams.serviceName
-        }).$promise.then(function () {
-            OvhApiTelephonyService.RepaymentConsumption().v6().query({
-                billingAccount: $stateParams.billingAccount,
-                serviceName: $stateParams.serviceName
-            }).$promise.then(function (repayments) {
-                _.each(repayments, function (repayment) {
-                    OvhApiTelephonyService.RepaymentConsumption().v6().get({
-                        billingAccount: $stateParams.billingAccount,
-                        serviceName: $stateParams.serviceName,
-                        consumptionId: repayment
-                    }).$promise.then(function (data) {
-                        if (data.price > 0) {
-                            self.repayments.push(data);
-                            self.totalRepayment.calls++;
-                            self.totalRepayment.duration += data.duration;
-                            self.totalRepayment.price += data.price;
-                        }
-                    });
+        }).$promise.then(function (repayments) {
+            _.each(repayments, function (repayment) {
+                OvhApiTelephonyService.RepaymentConsumption().v6().get({
+                    billingAccount: $stateParams.billingAccount,
+                    serviceName: $stateParams.serviceName,
+                    consumptionId: repayment
+                }).$promise.then(function (data) {
+                    if (data.price > 0) {
+                        self.repayments.push(data);
+                        self.totalRepayment.calls++;
+                        self.totalRepayment.duration += data.duration;
+                        self.totalRepayment.price += data.price;
+                    }
                 });
-            }).finally(function () {
-                self.isLoading = false;
             });
+        }).finally(function () {
+            self.isLoading = false;
         });
     };
 
@@ -66,6 +61,4 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialTransferCtr
         }
         self.applySorting();
     };
-
-    self.init();
 });

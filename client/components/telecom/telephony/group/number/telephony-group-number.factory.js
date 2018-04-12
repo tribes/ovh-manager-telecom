@@ -184,7 +184,7 @@ angular.module("managerApp").factory("TelephonyGroupNumber", function ($q, $inje
 
     TelephonyGroupNumber.prototype.isSpecialNumber = function () {
         var self = this;
-        return OvhApiTelephony.Rsva().Lexi().getCurrentRateCode({
+        return OvhApiTelephony.Rsva().v6().getCurrentRateCode({
             billingAccount: self.billingAccount,
             serviceName: self.serviceName
         }).$promise.then(function () { return $q.when(true); })
