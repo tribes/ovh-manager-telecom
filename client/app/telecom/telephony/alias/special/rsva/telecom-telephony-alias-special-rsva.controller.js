@@ -38,8 +38,8 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialRsvaCtrl", 
             }).then(function (scheduledRateCode) {
                 if (scheduledRateCode) {
                     self.scheduledRateCode = scheduledRateCode;
-                    self.formattedEffectiveDatetime = $filter("shortDate")(self.scheduledRateCode.effectiveDatetime, "dd/MM/yyyy");
-                    self.formattedCancelLimitDatetime = $filter("shortDate")(self.scheduledRateCode.cancelLimitDatetime, "dd/MM/yyyy");
+                    self.formattedEffectiveDatetime = $filter("date")(self.scheduledRateCode.effectiveDatetime, "dd/MM/yyyy");
+                    self.formattedCancelLimitDatetime = $filter("date")(self.scheduledRateCode.cancelLimitDatetime, "dd/MM/yyyy");
                     self.tariffBearingPrice = self.scheduledRateCode.updateRateCodePriceWithoutTax.value ? self.scheduledRateCode.updateRateCodePriceWithoutTax.text : self.tariffBearingPrice;
                 }
             }),
@@ -97,22 +97,37 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialRsvaCtrl", 
         return (self.rateCodeChanged && self.tariffBearingChangeAgreed) || !angular.equals(self.rsva.typology, self.rsvaForm.typology);
     };
 
-    self.applyChanges = function () {
-        self.isUpdating = true;
-
+    function updateRateCode () {
         return OvhApiTelephony.Rsva().v6().scheduleRateCode({
             billingAccount: $stateParams.billingAccount,
             serviceName: $stateParams.serviceName
-        }, { rateCode: self.rsvaForm.rateCode.code || "" }).$promise.then(function () {
+        }, { rateCode: _.get(self.rsvaForm, "rateCode.code", "") }).$promise.then(function () {
             self.rsva = angular.copy(self.rsvaForm);
             self.isEditing = false;
+        });
+    }
 
-            return OvhApiTelephony.Rsva().v6().edit({
-                billingAccount: $stateParams.billingAccount,
-                serviceName: $stateParams.serviceName
-            }, { typology: self.rsvaForm.typology.value.replace("fr_", "") }).$promise.then(function () {
-                Toast.success($translate.instant("telephony_alias_special_rsva_success"));
-            });
+    function updateTypology () {
+        return OvhApiTelephony.Rsva().v6().edit({
+            billingAccount: $stateParams.billingAccount,
+            serviceName: $stateParams.serviceName
+        }, { typology: self.rsvaForm.typology.value.replace("fr_", "") }).$promise;
+    }
+
+    self.applyChanges = function () {
+        var promises = [];
+        self.isUpdating = true;
+
+        if (self.rateCodeChanged && self.tariffBearingChangeAgreed) {
+            promises.push(updateRateCode());
+        }
+
+        promises.push(updateTypology());
+
+        return $q.allSettled(promises).then(function () {
+            Toast.success($translate.instant("telephony_alias_special_rsva_success"));
+        }).then(function () {
+            self.isEditing = false;
         }).catch(function (err) {
             Toast.error([$translate.instant("telephony_alias_special_rsva_error"), err.message].join(" "));
             return $q.reject(err);
@@ -177,7 +192,7 @@ angular.module("managerApp").controller("TelecomTelephonyAliasSpecialRsvaCtrl", 
         var param;
         if (action === "scheduleRateCode") {
             param = {
-                rateCode: self.rsvaForm.rateCode.code
+                rateCode: _.get(self.rsvaForm, "rateCode.code")
             };
         } else {
             param = {

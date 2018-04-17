@@ -207,7 +207,7 @@
                                                data-billing-account="{{ AliasSpecialRsvaCtrl.bulkDatas.billingAccount }}"
                                                data-service-name="{{ AliasSpecialRsvaCtrl.bulkDatas.serviceName }}"
                                                data-custom-class="link d-block pl-0 mb-3"
-                                               data-ng-disabled="AliasSpecialRsvaCtrl.isLoading"
+                                               data-ng-disabled="AliasSpecialRsvaCtrl.isLoading || (AliasSpecialRsvaCtrl.isEditing && AliasSpecialRsvaCtrl.onChangeTariffBearing() && !AliasSpecialRsvaCtrl.tariffBearingChangeAgreed)"
                                                data-bulk-infos="AliasSpecialRsvaCtrl.bulkDatas.infos"
                                                data-filter-services="AliasSpecialRsvaCtrl.filterServices"
                                                data-get-bulk-params="AliasSpecialRsvaCtrl.getBulkParams"
