@@ -7,7 +7,6 @@
         <h1 data-translate="telephony_alias_special_transfer_title"></h1>
     </header>
 
-
     <div class="telecom-section-content">
 
         <toast-message></toast-message>
@@ -22,10 +21,10 @@
                        ui-sref="telecom.telephony.alias.special.fees"
                        data-translate="telephony_alias_special_transfer_description_link"></a>
                 </div>
-                <table class="table">
+                <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th style="width: 45px;">&nbsp;</th>
+                            <th class="min-width"></th>
                             <th scope="col">
                                 <button type="button"
                                         class="btn btn-link p-0"
@@ -34,12 +33,12 @@
                                         data-ng-click="AliasSpecialTransferCtrl.orderBy('date')">
                                     <span data-translate="telephony_alias_special_transfer_date_filter"></span>
                                     <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'date' && AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                       </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'date' && !AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
+                                       </span>
                                     </span>
                                 </button>
                             </th>
@@ -51,12 +50,12 @@
                                         data-ng-click="AliasSpecialTransferCtrl.orderBy('calling')">
                                     <span data-translate="telephony_alias_special_transfer_calling_filter"></span>
                                     <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'calling' && AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                       </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'calling' && !AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
+                                       </span>
                                     </span>
                                 </button>
                             </th>
@@ -68,12 +67,12 @@
                                         data-ng-click="AliasSpecialTransferCtrl.orderBy('duration')">
                                     <span data-translate="telephony_alias_special_transfer_duration_filter"></span>
                                     <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'duration' && AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                       </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'duration' && !AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
+                                       </span>
                                     </span>
                                 </button>
                             </th>
@@ -85,12 +84,12 @@
                                         data-ng-click="AliasSpecialTransferCtrl.orderBy('operator')">
                                     <span data-translate="telephony_alias_special_transfer_operator_filter"></span>
                                     <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'operator' && AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                       </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'operator' && !AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
+                                       </span>
                                     </span>
                                 </button>
                             </th>
@@ -102,12 +101,12 @@
                                         data-ng-click="AliasSpecialTransferCtrl.orderBy('price')">
                                     <span data-translate="telephony_alias_special_transfer_price_filter"></span>
                                     <span>
-                                        <i class="oui-icon oui-icon-arrow-down"
+                                        <span class="oui-icon oui-icon-arrow-down"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'price' && AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
-                                        <i class="oui-icon oui-icon-arrow-up"
+                                       </span>
+                                        <span class="oui-icon oui-icon-arrow-up"
                                            data-ng-show="AliasSpecialTransferCtrl.state.orderBy === 'price' && !AliasSpecialTransferCtrl.state.orderDesc">
-                                        </i>
+                                       </span>
                                     </span>
                                 </button>
                             </th>
@@ -115,7 +114,7 @@
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="repayment in AliasSpecialTransferCtrl.repayments | orderBy:AliasSpecialTransferCtrl.state.orderBy:AliasSpecialTransferCtrl.state.orderDesc track by $index">
-                            <th style="width: 45px;">&nbsp;</th>
+                            <th class="min-width"></th>
                             <td data-ng-bind="repayment.creationDatetime | date:'dd-MM-yyyy hh:mm:ss'"></td>
                             <td data-ng-bind="repayment.calling"></td>
                             <td data-ng-bind="repayment.duration"></td>
@@ -132,8 +131,8 @@
                             </th>
                             <td class="font-weight-bold"
                                 data-ng-pluralize
-                                count="AliasSpecialTransferCtrl.totalRepayment.calls || 0"
-                                when="{'0': ('telephony_alias_special_transfer_calls' | translate: { calls: AliasSpecialTransferCtrl.calls}),
+                                data-count="AliasSpecialTransferCtrl.totalRepayment.calls || 0"
+                                data-when="{'0': ('telephony_alias_special_transfer_calls' | translate: { calls: AliasSpecialTransferCtrl.calls}),
                                        'one': ('telephony_alias_special_transfer_calls' | translate: { calls: AliasSpecialTransferCtrl.calls}),
                                        'other': ('telephony_alias_special_transfer_calls' | translate: { calls: AliasSpecialTransferCtrl.calls}) + 's'}"
                                 ></td>

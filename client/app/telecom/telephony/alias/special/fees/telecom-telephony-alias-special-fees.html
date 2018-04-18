@@ -7,7 +7,6 @@
         <h1 data-translate="telephony_alias_special_fees_title"></h1>
     </header>
 
-
     <div class="telecom-section-content">
 
         <toast-message></toast-message>
@@ -15,9 +14,11 @@
         <div class="row">
             <div class="col-md-6 widget-presentation"
                  data-ng-if="!AliasSpecialFeesCtrl.isLoading">
-                <table class="table table-condensed">
+                <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
+                            <th class="min-width"
+                                scope="col"></th>
                             <th scope="col">
                                 <button type="button"
                                         class="btn btn-link p-0"
@@ -105,26 +106,27 @@
                             </th>
                         </tr>
                     </thead>
-                        <tbody>
-                            <tr data-ng-repeat="fee in AliasSpecialFeesCtrl.fees | orderBy:AliasSpecialFeesCtrl.state.orderBy:AliasSpecialFeesCtrl.state.orderDesc track by $index">
-                                <td data-ng-bind="fee.creationDatetime | date:'dd-MM-yyyy hh:mm:ss'"></td>
-                                <td data-ng-bind="fee.calling"></td>
-                                <td data-ng-bind="fee.duration"></td>
-                                <td data-ng-bind="fee.operator"></td>
-                                <td data-ng-bind="fee.price"></td>
-                            </tr>
-                        </tbody>
+                    <tbody>
+                        <tr data-ng-repeat="fee in AliasSpecialFeesCtrl.fees | orderBy:AliasSpecialFeesCtrl.state.orderBy:AliasSpecialFeesCtrl.state.orderDesc track by $index">
+                            <th scope="row"
+                                data-ng-bind="fee.creationDatetime | date:'dd-MM-yyyy hh:mm:ss'"></th>
+                            <td data-ng-bind="fee.calling"></td>
+                            <td data-ng-bind="fee.duration"></td>
+                            <td data-ng-bind="fee.operator"></td>
+                            <td data-ng-bind="fee.price"></td>
+                        </tr>
+                    </tbody>
                     <tfoot>
                         <tr>
-                            <td class="font-weight-bold"
+                            <th class="font-weight-bold"
                                 scope="row"
                                 colspan="2"
                                 data-translate="telephony_alias_special_fees_total">
-                            </td>
+                            </th>
                             <td class="font-weight-bold"
                                 data-ng-pluralize
-                                count="AliasSpecialFeesCtrl.totalRepayment.calls || 0"
-                                when="{'0': ('telephony_alias_special_fees_calls' | translate: { calls: AliasSpecialFeesCtrl.totalRepayment.calls }),
+                                data-count="AliasSpecialFeesCtrl.totalRepayment.calls || 0"
+                                data-when="{'0': ('telephony_alias_special_fees_calls' | translate: { calls: AliasSpecialFeesCtrl.totalRepayment.calls }),
                                        'one': ('telephony_alias_special_fees_calls' | translate: { calls: AliasSpecialFeesCtrl.totalRepayment.calls }),
                                        'other': ('telephony_alias_special_fees_calls' | translate: { calls: AliasSpecialFeesCtrl.totalRepayment.calls }) + 's'}"></td>
                             <td colspan="2"
